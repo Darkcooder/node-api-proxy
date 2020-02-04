@@ -10,19 +10,22 @@ express.get('/', function (req, res) {
 
 config.routes.forEach((route) => {
     let callback = function (req, res) {
-        if(config.localTokens.indexOf(req.token) === -1) {
-            res.status(401).send("Unknown token");
+        let localParams = Object.assign(req.params, req.query)
+        if(config.localTokens.indexOf(localParams.token) === -1) {
+            console.log(localParams)
+            res.status(401).send("Unknown token ");
             return;
         }
-        let request = Object.assign(req, route.baseParams);
+        delete localParams.token;
+        let params = Object.assign(localParams, route.baseParams);
         request({
             method: route.remoteMethod,
             uri: route.remoteUrl,
-            form: request,
+            form: params,
             headers: route.baseHeaders
         }, function(error, response, body) {
             if(error) res.error(error);
-            res.status(response && response.status).send(body);
+            res.status(response && response.statusCode).send(body);
         })
     };
     switch(route.localMethod) {

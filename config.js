@@ -17,7 +17,7 @@ module.exports = {
         {
             localUrl: '/googleapi',
             remoteUrl: 'https://google.com/api/method',
-            localMethod: 'POST',
+            localMethod: 'GET',
             remoteMethod: 'POST',
             baseParams: {
                 key: "AIZfrekjlskdukjrkkn34234342m"
