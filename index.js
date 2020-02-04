@@ -10,9 +10,10 @@ express.get('/', function (req, res) {
 
 config.routes.forEach((route) => {
     let callback = function (req, res) {
-        let localParams = Object.assign(req.params, req.query)
+        let localParams = Object.assign(req.params, req.query);
+        res.setHeader('Access-Control-Allow-Origin', config.allowOrigin);
         if(config.localTokens.indexOf(localParams.token) === -1) {
-            console.log(localParams)
+            console.log(localParams);
             res.status(401).send("Unknown token ");
             return;
         }

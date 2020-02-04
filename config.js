@@ -1,6 +1,7 @@
 let baseUrl = '';
 module.exports = {
     port: 3000,
+    allowOrigin: '*',
     localTokens: ['ewrewirjklnhwuer234jkjn434hd'],
     routes: [
         {
